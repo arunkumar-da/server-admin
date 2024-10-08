@@ -1,0 +1,14 @@
+.header {
+    background-color: #0070BF;
+
+  }
+/* header.css */
+.logout-button {
+  margin-left: auto;
+  background-color: #f44336; /* Red */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+}

@@ -1,0 +1,31 @@
+/* styles.css */
+@media (max-width: 576px) { /* Mobile */
+    .ant-card {
+      padding: 10px;
+    }
+    .ant-input {
+      font-size: 14px; /* Smaller font for mobile */
+    }
+    .ant-btn {
+      font-size: 16px; /* Smaller button for mobile */
+    }
+  }
+  
+  @media (min-width: 576px) and (max-width: 768px) { /* Tablet */
+    .ant-card {
+      padding: 15px;
+    }
+    .ant-input {
+      font-size: 16px; /* Slightly larger font for tablets */
+    }
+  }
+  
+  @media (min-width: 768px) { /* Laptop and larger screens */
+    .ant-card {
+      padding: 20px;
+    }
+    .ant-input {
+      font-size: 18px; /* Larger font for desktops */
+    }
+  }
+  

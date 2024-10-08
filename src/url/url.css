@@ -1,0 +1,78 @@
+.white-card {
+    background-color: white;
+    border-radius: 50px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Adds shadow for depth */
+    padding: 20px;
+    margin: 40px auto; 
+    height:498px;
+    width: 758px;
+  }
+
+      .select-wrapper {
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: 10%;
+    width: 100%; /* Adjusts the width of the select element */
+  }
+ 
+  .select {
+    width: 100%; /* Ensures the select takes full width */
+    height: 40px; /* Increases the height of the select dropdown */
+    font-size: 16px; /* Increases the font size for better visibility */
+  }
+  
+  /* Optional: Styles for the dropdown arrow if you're using a custom one */
+  .dropdown-arrow {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+  .text {
+    position: fixed;
+    margin-top: 3%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (min-width: 992px) {
+  .text {
+    margin-top: -10vh; /* Adjusted margin-top for laptop view */
+  }
+}
+.button {
+  display: inline-block;
+  padding: 10px 20px; /* Decreased padding for smaller size */
+  font-size: 18px; /* Reduced font size */
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #143d64;
+  border: none;
+  border-radius: 10px; /* Reduced border radius */
+  box-shadow: 0 5px #999; /* Reduced box shadow */
+  margin-left: 10%; /* Adjusted margin for centering */
+  margin-top: 90%; /* Adjusted margin for centering */
+
+  /* Optional: Ensure the button is responsive */
+  max-width: 200px; /* Maximum width */
+  width: 100%; /* Take full width */
+}
+
+.button:hover {background-color: #3e8e41}
+
+.button:active {
+background-color: #3e8e41;
+box-shadow: 0 5px #666;
+transform: translateY(4px);
+}
+
+

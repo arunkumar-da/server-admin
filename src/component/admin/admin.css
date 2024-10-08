@@ -1,0 +1,64 @@
+/* login.css */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+      background-color: #143D64;
+   
+  }
+  
+  .card {
+    width: 90%; /* Use percentage for responsive width */
+    max-width: 500px; /* Maximum width */
+    padding: 30px; /* More padding inside the card */
+    border-radius: 15px; /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Adds shadow for depth */
+    margin-top: 100px; /* Space above the card */
+    margin-bottom: 50px;
+    display: flex;
+    justify-content: center; /* Center the child horizontally */
+    align-items: center; /* Center the child vertically */
+    height: 60vh; /* Space below the card */
+  }
+  @media (max-width: 	480px) {
+    .card {
+      margin-top: 160px;
+      justify-content: center;
+      align-items: center; 
+      margin-left: 4%;
+  max-height: 40%;
+    }
+  }
+  @media (max-width: 	767px) {
+    .card {
+      margin-top: 160px;
+      justify-content: center;
+      align-items: center; 
+      margin-left: 4%;
+  max-height: 40%;
+    }
+  }
+  @media (max-width: 	1024px) {
+    .card {
+      margin-top: 160px;
+      justify-content: center;
+      align-items: center; 
+      margin-left: 4%;
+  max-height: 40%;
+    }
+  }
+  @media (max-width: 	1280px) {
+    .card {
+      margin-top: 160px;
+      justify-content: center;
+      align-items: center; 
+      margin-left: 4%;
+  max-height: 40%;
+    }
+  }
+  
+  .ant-input:not(:last-child),
+  .ant-input-password:not(:last-child) {
+    margin-bottom: 20px; /* Space below each input field */
+  }
+  
