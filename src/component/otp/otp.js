@@ -14,7 +14,7 @@ function App() {
 
   const sendOtp = async () => {
     try {
-      const response = await axios.post('http://localhost:5000/send-otp', { email });
+      const response = await axios.post('https://www.noraasoft.com:4012/send-otp', { email });
       setMessage(response.data.message);
       setOtpSent(true);
     } catch (error) {
@@ -24,7 +24,7 @@ function App() {
 
   const verifyOtp = async () => {
     try {
-      const response = await axios.post('http://localhost:5000/verify-otp', { email, otp });
+      const response = await axios.post('https://www.noraasoft.com:4012/verify-otp', { email, otp });
       setMessage(response.data.message);
       if (response.data.message === "OTP verified successfully") {
         navigate('/url');

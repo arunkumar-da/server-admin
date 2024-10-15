@@ -15,7 +15,7 @@ const Client = () => {
 
   useEffect(() => {
     const fetchClients = async () => {
-      const response = await fetch('http://localhost:5016/client');
+      const response = await fetch('https://www.noraasoft.com:5016/client');
       const result = await response.json();
       setData(result);
     };
@@ -26,7 +26,7 @@ const Client = () => {
     const { role, email, phoneNumber, skills } = values;
     if (role && email && phoneNumber && skills) {
       const newEntry = { role, email, phoneNumber, skills };
-      await fetch('http://localhost:5016/client', {
+      await fetch('https://www.noraasoft.com:5016/client', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newEntry),
@@ -38,7 +38,7 @@ const Client = () => {
 
   const handleRemove = async (record) => {
     try {
-      const response = await fetch('http://localhost:5016/client', {
+      const response = await fetch('https://www.noraasoft.com:5016/client', {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: record.email }),

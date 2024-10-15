@@ -8,14 +8,14 @@ const Url = () => {
   const [selectedOption, setSelectedOption] = useState('');
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [options, setOptions] = useState([]); // State to hold roles
-  const additionalText = 'http://69.164.221.175/form?role=';
+  const additionalText = 'https://www.noraasoft.com/?role=';
   const navigate = useNavigate(); // Initialize the navigate function
   const { visible, setvisible } = useRole();
   // Fetch roles when the component mounts
   useEffect(() => {
     const fetchRoles = async () => {
       try {
-        const response = await fetch('http://localhost:5015/api/roles');
+        const response = await fetch('https://www.noraasoft.com:5015/api/roles');
         const data = await response.json();
         const roles = data.map(role => role.role); // Extract the role from the response
         setOptions(roles);
@@ -28,9 +28,31 @@ const Url = () => {
   }, []);
 
   const handleCopy = () => {
-    const textToCopy = additionalText + selectedOption;
-    navigator.clipboard.writeText(textToCopy);
-  };
+  const textToCopy = additionalText + selectedOption;
+
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    // If the Clipboard API is supported
+    navigator.clipboard.writeText(textToCopy).then(() => {
+      alert('URL copied to clipboard!');
+    }).catch(err => {
+      console.error('Failed to copy: ', err);
+    });
+  } else {
+    // Fallback for older browsers
+    const textarea = document.createElement('textarea');
+    textarea.value = textToCopy;
+    document.body.appendChild(textarea);
+    textarea.select();
+    try {
+      document.execCommand('copy');
+      alert('URL copied to clipboard!');
+    } catch (err) {
+      console.error('Failed to copy: ', err);
+    } finally {
+      document.body.removeChild(textarea);
+    }
+  }
+};
 
   const handleClick = () => {
     // Navigate to the desired route
@@ -59,7 +81,7 @@ const Url = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:5015/api/recruiter', {
+      const response = await fetch('https://www.noraasoft.com:5015/api/recruiter', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -125,9 +147,10 @@ const Url = () => {
           />
         </Tooltip>
          )}
+{visible && (
         <Tooltip title="Questions">
         <FloatButton onClick={handleClick} />
-    </Tooltip>
+    </Tooltip> )}
     <Tooltip title="Clients">
         <FloatButton.BackTop visibilityHeight={0}   onClick={clientClick}  />
         </Tooltip>

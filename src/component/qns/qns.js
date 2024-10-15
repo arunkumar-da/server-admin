@@ -8,7 +8,7 @@ const QnsCard = () => {
   const { visible, setvisible } = useRole();
   useEffect(() => {
     const fetchQuestions = async () => {
-      const response = await fetch('http://localhost:5019/questions');
+      const response = await fetch('https://www.noraasoft.com:5019/questions');
       const result = await response.json();
       setData(result);
     };
@@ -18,7 +18,7 @@ const QnsCard = () => {
   const handleAdd = async () => {
     if (newRole && newQuestion) {
       const newEntry = { role: newRole, qns: newQuestion };
-      await fetch('http://localhost:5019/questions', {
+      await fetch('https://www.noraasoft.com:5019/questions', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newEntry),
@@ -30,7 +30,7 @@ const QnsCard = () => {
   };
 
   const handleRemove = async (record) => {
-    await fetch(`http://localhost:5019/questions`, {
+    await fetch(`https://www.noraasoft.com:5019/questions`, {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ role: record.role, question: record.qns }),

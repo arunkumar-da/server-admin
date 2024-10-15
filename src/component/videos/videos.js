@@ -15,10 +15,12 @@ const VideoComponent = () => {
   const { visible, setvisible } = useRole();
   useEffect(() => {
     const fetchVideos = async () => {
+ console.log("Selected Role:", selectedRole);
+    console.log("Visible State:", visible); // Log the visible state
       if (!selectedRole) return; 
       setLoading(true);
       try {
-        const response = await fetch(`http://localhost:5003/videos/${selectedRole}`);
+        const response = await fetch(`https://www.noraasoft.com:5003/videos/${selectedRole}`);
         const data = await response.json();
         setVideos(data);
       } catch (error) {
@@ -32,7 +34,7 @@ const VideoComponent = () => {
   }, [selectedRole]);
   const handleDelete = async (filename) => {
     try {
-      const response = await fetch(`http://localhost:5003/videos/${selectedRole}/${filename}`, {
+      const response = await fetch(`https://www.noraasoft.com:5003/videos/${selectedRole}/${filename}`, {
         method: 'DELETE',
       });
       if (response.ok) {
@@ -84,7 +86,7 @@ const VideoComponent = () => {
     return (
       <div onClick={() => openVideoPlayer(video)} style={{ cursor: 'pointer' }}>
         <ReactPlayer
-          url={`http://localhost:5003/videos/${selectedRole}/${video}`}
+          url={`https://www.noraasoft.com:5003/videos/${selectedRole}/${video}`}
           width="100%"
           height="240px"
           controls
@@ -120,7 +122,7 @@ const VideoComponent = () => {
                     title={video} 
                     description={
                       <a 
-                        href={`http://localhost:5003/videos/${selectedRole}/${video}`} 
+                        href={`https://www.noraasoft.com:5003/videos/${selectedRole}/${video}`} 
                         target="_blank" 
                         rel="noopener noreferrer"
                       >
@@ -143,7 +145,7 @@ const VideoComponent = () => {
       >
         {currentVideo && (
           <ReactPlayer
-            url={`http://localhost:5003/videos/${selectedRole}/${currentVideo}`}
+            url={`https://www.noraasoft.com:5003/videos/${selectedRole}/${currentVideo}`}
             controls
             width="100%"
             height="500px"

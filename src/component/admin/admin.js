@@ -6,8 +6,8 @@ import { useRole } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
 const CustomCard = ({ title }) => {
+const { visible, setvisible } = useRole();
   const { email, setEmail } = useRole();
-  const { visible, setvisible } = useRole();
   const [password, setPassword] = useState('');
   const [isEmailEntered, setIsEmailEntered] = useState(false);
   const [isPasswordEntered, setIsPasswordEntered] = useState(false);
@@ -25,6 +25,11 @@ const CustomCard = ({ title }) => {
     setIsPasswordEntered(!!event.target.value);
   };
 
+  const validateEmail = (email) => {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(String(email).toLowerCase());
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -33,38 +38,55 @@ const CustomCard = ({ title }) => {
       return;
     }
 
+    if (!validateEmail(email)) {
+      alert('Please enter a valid email address.');
+      return;
+    }
+
     setLoading(true);
     setProgress(0);
 
     try {
-      const response = await axios.post('http://localhost:4011/auth/login', {
+      const loginResponse = await axios.post('https://www.noraasoft.com:4011/auth/login', {
         email,
         password,
       });
 
-      if (response.status === 200) {
-        setvisible(true);
+      if (loginResponse.status === 200) {
+setvisible(true);
         setProgress(50);
-        await axios.post('http://localhost:5000/send-otp', { email });
+        await axios.post('https://www.noraasoft.com:4012/send-otp', { email });
         setProgress(100);
         setTimeout(() => {
           setLoading(false);
-          navigate('/otp');
+          navigate('/otp'); // Navigate to OTP page
         }, 500);
-      } else {
-        setLoading(false);
-        alert('Wrong email or password');
       }
     } catch (error) {
       setLoading(false);
       console.error('Error logging in:', error);
-      alert('An error occurred. Please try again later.');
+      handleErrorResponse(error);
+    }
+  };
+
+  const handleErrorResponse = (error) => {
+    if (error.response) {
+      if (error.response.status === 401) {
+        alert('Invalid email or password. Please try again.');
+      } else {
+        alert('An error occurred. Please try again later.');
+      }
+    } else if (error.request) {
+      alert('Network error. Please check your connection.');
+    } else {
+      alert('An unexpected error occurred. Please try again later.');
     }
   };
 
   return (
-    <div>
+     <div>
       <div className="card">
+      
         <Row justify="center">
           <form onSubmit={handleSubmit} className="form-container">
             <Input
@@ -76,8 +98,9 @@ const CustomCard = ({ title }) => {
                 borderRadius: isEmailEntered ? '30px' : '0px',
                 backgroundColor: isEmailEntered ? 'transparent' : 'aliceblue',
               }}
+              aria-label="Email"
             />
-            
+
             <Input.Password
               className="textfield"
               value={password}
@@ -88,28 +111,27 @@ const CustomCard = ({ title }) => {
                 backgroundColor: isPasswordEntered ? 'transparent' : 'aliceblue',
                 textAlign: 'center',
               }}
+              aria-label="Password"
             />
-            
+
             <Button type="primary" htmlType="submit" className="login-button">
               Submit
             </Button>
           </form>
         </Row>
-      </div>
+       </div>
 
-      <Modal
-        visible={loading}
-        closable={false}
-        footer={null}
-        centered
-      >
-        <Progress percent={progress} status="active" />
-        <p style={{ textAlign: 'center', marginTop: '20px' }}>
-          {progress < 50 ? 'Logging in...' : 'Sending OTP...'}
-        </p>
-      </Modal>
+        <Modal visible={loading} closable={false} footer={null} centered>
+          <Progress percent={progress} status="active" />
+          <p style={{ textAlign: 'center', marginTop: '20px' }}>
+            {progress < 100 ? 'Logging in...' : 'Sending OTP...'}
+          </p>
+        </Modal>
+      
+     
     </div>
   );
 };
 
 export default CustomCard;
+
